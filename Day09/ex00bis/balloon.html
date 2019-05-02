@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="ballon">
+
+        </div>
+        <style>
+            div {
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                border-radius: 50%;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+        </script>
+        <script>
+            var matchColors = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;
+            var color;
+            var height;
+            var colors = [];
+        $(document).ready(function(){
+            $("#ballon").click(function() {
+                height = $('#ballon').css("height");
+                if (parseInt(height) < 420)
+                {
+                    $("#ballon").css("width", "+=10");
+                    $("#ballon").css("height", "+=10");
+                }
+                else
+                {
+                    $("#ballon").css("width", "200px");
+                    $("#ballon").css("height", "200px");
+                }
+                color = $('#ballon').css("background-color");
+                colors = matchColors.exec(color);
+                if (colors[1] == "255" && colors[2] == "0" && colors[3] == "0")
+                    $('#ballon').css("background-color", "green" );
+                else if (colors[1] == "0" && colors[2] == "128" && colors[3] == "0")
+                    $('#ballon').css("background-color" , "blue");
+                else if (colors[1] == "0" && colors[2] == "0" && colors[3] == "255")
+                    $('#ballon').css("background-color" , "red");
+            });
+            $("#ballon").mouseout(function() {
+                height = $('#ballon').css("height");
+                if (parseInt(height) > 200)
+                {
+                    $("#ballon").css("width", "-=5");
+                    $("#ballon").css("height", "-=5");
+                    color = $('#ballon').css("background-color");
+                colors = matchColors.exec(color);
+                if (colors[1] == "255" && colors[2] == "0" && colors[3] == "0")
+                    $('#ballon').css("background-color" , "blue");
+                else if (colors[1] == "0" && colors[2] == "128" && colors[3] == "0")
+                    $('#ballon').css("background-color" , "red");
+                else if (colors[1] == "0" && colors[2] == "0" && colors[3] == "255")
+                    $('#ballon').css("background-color", "green" );
+                }
+                else
+                {
+                    $("#ballon").css("width", "200px");
+                    $("#ballon").css("height", "200px"); 
+                }
+            });
+    });
+        </script>
+    </body>
+</html>

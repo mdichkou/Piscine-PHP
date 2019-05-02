@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="ballon" onclick="add_size('ballon'); change_color('ballon');" 
+        onmouseout="decrease_size('ballon'); reverse_color('ballon');">
+
+        </div>
+        <style>
+            div {
+                width: 200px;
+                height: 200px;
+                background-color: red;
+                border-radius: 50%;
+            }
+        </style>
+        <script>
+            function add_size(_divId) {
+                var _div = document.getElementById(_divId);
+                var ele = window.getComputedStyle(_div);
+                var height = parseInt(ele.height);
+                if (height < 420)
+                {
+                    var height = parseInt(ele.height) + 10;
+                    var width = parseInt(ele.width) + 10 ;
+                    _div.style.width = width + 'px';
+                    _div.style.height = height + 'px';
+                }
+                else
+                {
+                    _div.style.width = 200 + 'px';
+                    _div.style.height = 200 + 'px'; 
+                }
+            }
+            function decrease_size(_divId) {
+                var _div = document.getElementById(_divId);
+                var ele = window.getComputedStyle(_div);
+                var height = parseInt(ele.height);
+                if (height > 200)
+                {
+                    var height = parseInt(ele.height) - 5;
+                    var width = parseInt(ele.width) - 5;
+                    _div.style.width = width + 'px';
+                    _div.style.height = height + 'px';
+                }
+                else
+                {
+                    _div.style.width = 200 + 'px';
+                    _div.style.height = 200 + 'px'; 
+                }
+            }
+            function change_color(_divId)
+            {
+                var _div = document.getElementById(_divId);
+                var matchColors = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;
+                var color = window.getComputedStyle(_div).backgroundColor;
+                var colors = matchColors.exec(color);
+                if (colors[1] == "255" && colors[2] == "0" && colors[3] == "0")
+                    _div.style.backgroundColor = "green";
+                else if (colors[1] == "0" && colors[2] == "128" && colors[3] == "0")
+                    _div.style.backgroundColor = "blue";
+                else if (colors[1] == "0" && colors[2] == "0" && colors[3] == "255")
+                    _div.style.backgroundColor = "red";
+
+            }
+            function reverse_color(_divId)
+            {
+                var _div = document.getElementById(_divId);
+                var matchColors = /rgb\((\d{1,3}), (\d{1,3}), (\d{1,3})\)/;
+                var color = window.getComputedStyle(_div).backgroundColor;
+                var colors = matchColors.exec(color);
+                if (colors[1] == "255" && colors[2] == "0" && colors[3] == "0")
+                    _div.style.backgroundColor = "blue";
+                else if (colors[1] == "0" && colors[2] == "128" && colors[3] == "0")
+                    _div.style.backgroundColor = "red";
+                else if (colors[1] == "0" && colors[2] == "0" && colors[3] == "255")
+                    _div.style.backgroundColor = "green";
+            }
+        </script>
+    </body>
+</html>
